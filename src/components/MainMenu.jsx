@@ -5,6 +5,20 @@ import Rating from "react-rating";
 export function MainMenu(props) {
   const [products, setProducts] = useState(null);
 
+  function insertNewProd() {
+    setProducts([
+      ...products,
+      {
+        thumbnail: "",
+        title: "Producto de prueba",
+        rating: 3,
+        description: "Esto es una descripción",
+        price: 7,
+        discountPercentage: 15,
+      },
+    ]);
+  }
+
   useEffect(() => {
     const productsAxios = axios
       .get("https://dummyjson.com/products")
@@ -22,6 +36,9 @@ export function MainMenu(props) {
         </h5>
         <div class="card-body">
           <h5 class="card-title display-5">Buy your products here!</h5>
+          <div className="row">
+            <button onClick={insertNewProd}> insertar nuevo producto</button>
+          </div>
           <div className="products d-flex flex-wrap">
             {products &&
               products.map((product, index) => (
